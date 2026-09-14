@@ -130,6 +130,10 @@ ColumnLayout {
             text: "FruitSalad"
             value: 8
         }
+        ListElement {
+            text: "UltraVibrant"
+            value: 9
+        }
     }
 
     onPlasmoidExpandedChanged: {

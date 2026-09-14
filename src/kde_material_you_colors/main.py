@@ -327,7 +327,7 @@ def main():
         "--scheme-variant",
         "-sv",
         type=int,
-        help="Changes between Material You scheme variants 0 = Content, 1 = Expressive, 2 = Fidelity, 3 = Monochrome, 4 = Neutral, 5 = TonalSpot, 6 = Vibrant, 7 = Rainbow, 8 = FruitSalad (default is 5)",
+        help="Changes between Material You scheme variants 0 = Content, 1 = Expressive, 2 = Fidelity, 3 = Monochrome, 4 = Neutral, 5 = TonalSpot, 6 = Vibrant, 7 = Rainbow, 8 = FruitSalad, 9 = UltraVibrant (default is 5)",
         default=None,
         metavar="<integer>",
     )

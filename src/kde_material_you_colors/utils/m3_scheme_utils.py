@@ -11,6 +11,8 @@ from materialyoucolor.scheme.scheme_fruit_salad import SchemeFruitSalad
 from materialyoucolor.scheme.scheme_monochrome import SchemeMonochrome
 from materialyoucolor.scheme import *
 from materialyoucolor.palettes.tonal_palette import TonalPalette
+from materialyoucolor.dynamiccolor.dynamic_scheme import DynamicScheme
+from materialyoucolor.dynamiccolor.variant import Variant
 from materialyoucolor.dynamiccolor.dynamic_color import DynamicColor
 from kde_material_you_colors.config import Configs
 from kde_material_you_colors.utils.color_utils import rgb2hex
@@ -41,6 +43,39 @@ def palette_to_hex(palette: TonalPalette):
     return tones
 
 
+class SchemeUltraVibrant(DynamicScheme):
+    def __init__(
+        self,
+        source_color_hct,
+        is_dark,
+        contrast_level,
+        spec_version="2025",
+        platform="phone",
+    ):
+        source = source_color_hct
+        secondary_hue = DynamicScheme.get_rotated_hue(
+            source, [0, 38, 105, 140, 333, 360], [-14, 10, -14, 10, -14]
+        )
+        tertiary_hue = DynamicScheme.get_rotated_hue(
+            source,
+            [0, 38, 71, 105, 140, 161, 253, 333, 360],
+            [-72, 35, 24, -24, 62, 50, 62, -72],
+        )
+        super().__init__(
+            source_color_hct=source,
+            variant=Variant.VIBRANT,
+            contrast_level=contrast_level,
+            is_dark=is_dark,
+            platform=platform,
+            spec_version=spec_version,
+            primary_palette=TonalPalette.from_hue_and_chroma(source.hue, 150),
+            secondary_palette=TonalPalette.from_hue_and_chroma(secondary_hue, 120),
+            tertiary_palette=TonalPalette.from_hue_and_chroma(tertiary_hue, 100),
+            neutral_palette=TonalPalette.from_hue_and_chroma(secondary_hue, 45),
+            neutral_variant_palette=TonalPalette.from_hue_and_chroma(secondary_hue, 55),
+        )
+
+
 schemes = [
     SchemeContent,
     SchemeExpressive,
@@ -51,6 +86,7 @@ schemes = [
     SchemeVibrant,
     SchemeRainbow,
     SchemeFruitSalad,
+    SchemeUltraVibrant,
 ]
 
 
