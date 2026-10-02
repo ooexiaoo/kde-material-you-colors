@@ -227,14 +227,7 @@ class ThemeConfig:
         #     c = contrast_ratio(pywal_colors_light[0], color)
         #     print(f"{color}  {'{0:.2g}'.format(c)} |", end=" ")
         # print()
-        #
-        # Colors:View ForegroundNormal is pinned to onSurfaceVariant, the same
-        # token Colors:Window ForegroundNormal uses. KDE resolves Theme's
-        # textColor from Colors:Window and highlightedTextColor from
-        # Colors:View, and applets that swap between the two on focus --
-        # org.kde.plasma.appmenu (the "Global Menu") does exactly that --
-        # visibly recolour themselves whenever they gain or lose focus.
-        # Pointing both roles at one token makes those transitions a no-op.
+
         self._light_scheme = f"""[ColorEffects:Disabled]
 Color={colors_light["surfaceContainer"]}
 ColorAmount=0.5
@@ -350,7 +343,7 @@ ForegroundInactive={colors_light['outline']}
 ForegroundLink={extras['link']['light']['color']}
 ForegroundNegative={extras['negative']['light']['color']}
 ForegroundNeutral={extras['neutral']['light']['color']}
-ForegroundNormal={colors_light['onSurfaceVariant']}
+ForegroundNormal={colors_light['onSurface']}
 ForegroundPositive={extras['positive']['light']['color']}
 ForegroundVisited={extras['visited']['light']['color']}
 
@@ -387,9 +380,6 @@ inactiveBlend=239,240,241
 inactiveForeground={colors_light['onSurfaceVariant']}
         """
 
-        # See the note above _light_scheme: Colors:View ForegroundNormal is
-        # pinned to onSurfaceVariant so highlightedTextColor and textColor
-        # resolve identically and focus-driven recolouring stops.
         self._dark_scheme = f"""[ColorEffects:Disabled]
 Color={colors_dark["surfaceContainer"]}
 ColorAmount=0.5
@@ -505,7 +495,7 @@ ForegroundInactive={colors_dark['outline']}
 ForegroundLink={extras['link']['dark']['color']}
 ForegroundNegative={extras['negative']['dark']['color']}
 ForegroundNeutral={extras['neutral']['dark']['color']}
-ForegroundNormal={colors_dark['onSurfaceVariant']}
+ForegroundNormal={colors_dark['onSurface']}
 ForegroundPositive={extras['positive']['dark']['color']}
 ForegroundVisited={extras['visited']['dark']['color']}
 
