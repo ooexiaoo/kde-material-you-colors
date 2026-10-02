@@ -26,6 +26,9 @@ from kde_material_you_colors.utils.extra_image_utils import sourceColorsFromImag
 from kde_material_you_colors.schemeconfigs import ThemeConfig
 from kde_material_you_colors.utils.math_utils import clip
 from kde_material_you_colors.utils.color_utils import static_color
+from kde_material_you_colors.utils import hct_cache
+
+hct_cache.install()
 
 
 def dict_to_hex(dark_scheme):

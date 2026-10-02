@@ -88,6 +88,9 @@ def set_icons(icons_light, icons_dark, light=False):
     icons = icons_light if light else icons_dark
 
     if icons and settings.PLASMA_CHANGEICONS_PATH:
+        if icons == kde_globals_icons():
+            logging.debug(f"Icon theme already set to {icons}, skipping.")
+            return
         try:
             # Execute the command to change icons.
             changeicons_output = subprocess.check_output(
@@ -105,6 +108,21 @@ def set_icons(icons_light, icons_dark, light=False):
             logging.warning(
                 f"{settings.CHANGE_ICONS_PROGRAM} wasn't found, can't apply icon themes."
             )
+
+
+def kde_globals_icons():
+    """Icon theme Plasma currently has applied, None if unknown"""
+    if os.path.exists(settings.KDE_GLOBALS):
+        try:
+            kdeglobals = configparser.ConfigParser()
+            kdeglobals.optionxform = str
+            kdeglobals.read(settings.KDE_GLOBALS)
+            if "Icons" in kdeglobals and "Theme" in kdeglobals["Icons"]:
+                return kdeglobals["Icons"]["Theme"]
+        except Exception as e:
+            logging.error(f"Error:\n{e}")
+
+    return None
 
 
 def kde_globals_light():

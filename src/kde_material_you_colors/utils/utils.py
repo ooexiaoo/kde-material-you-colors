@@ -13,7 +13,15 @@ from kde_material_you_colors import settings
 
 def run_hook(hook):
     if hook is not None:
-        subprocess.Popen(hook, shell=True)
+        # Fully detached so the hook adds no latency and is unaffected by
+        # signals aimed at this process, while keeping stdout/stderr inherited
+        # so its diagnostics still land where they always have.
+        subprocess.Popen(
+            hook,
+            shell=True,
+            stdin=subprocess.DEVNULL,
+            start_new_session=True,
+        )
 
 
 def kill_existing():
